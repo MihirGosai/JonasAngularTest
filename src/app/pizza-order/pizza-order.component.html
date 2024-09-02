@@ -1,0 +1,71 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th rowspan="2">Toppings</th>
+      <th colspan="4" class="text-center">Pizza Sizes</th>
+    </tr>
+    <tr>
+      <th>Small ($5)</th>
+      <th>Medium ($7)</th>
+      <th>Large ($8)</th>
+      <th>Extra Large ($9)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">Veg Toppings</td>
+    </tr>
+    <tr *ngFor="let topping of vegToppings">
+      <td>{{ topping.name }} (${{topping.price | number : '1.2-2'}})</td>
+      <td><input type="checkbox" [checked]="isSmallSizeToppingSelected(topping)"
+          (change)="toggleSmallSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isMediumSizeToppingSelected(topping)"
+          (change)="toggleMediumSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isLargeSizeToppingSelected(topping)"
+          (change)="toggleLargeSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isXLargeSizeToppingSelected(topping)"
+          (change)="toggleXLargeSizeTopping(topping)"></td>
+    </tr>
+    <tr>
+      <td colspan="5">Non Veg Toppings</td>
+    </tr>
+    <tr *ngFor="let topping of nonVegToppings">
+      <td>{{ topping.name }} (${{topping.price | number : '1.2-2'}})</td>
+      <td><input type="checkbox" [checked]="isSmallSizeToppingSelected(topping)"
+          (change)="toggleSmallSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isMediumSizeToppingSelected(topping)"
+          (change)="toggleMediumSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isLargeSizeToppingSelected(topping)"
+          (change)="toggleLargeSizeTopping(topping)"></td>
+      <td><input type="checkbox" [checked]="isXLargeSizeToppingSelected(topping)"
+          (change)="toggleXLargeSizeTopping(topping)"></td>
+    </tr>
+    <tr>
+      <td colspan="5" class="light-sky-blue">Total</td>
+    </tr>
+    <tr>
+      <td>Offer</td>
+      <td><span *ngIf="smallSizeAppliedOffer">{{smallSizeAppliedOffer}}<i class="p-1 text-success bi bi-check-circle"></i></span></td>
+      <td><span *ngIf="mediumSizeAppliedOffer">{{mediumSizeAppliedOffer}}<i class="p-1 text-success bi bi-check-circle"></i></span></td>
+      <td><span *ngIf="largeSizeAppliedOffer">{{largeSizeAppliedOffer}}<i class="p-1 text-success bi bi-check-circle"></i></span></td>
+      <td><span *ngIf="xLargeSizeAppliedOffer">{{xLargeSizeAppliedOffer}}<i class="p-1 text-success bi bi-check-circle"></i></span></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><span *ngIf="selectedSmallSizeToppings.length > 0">{{ totalSmallSizePrice | currency }}</span></td>
+      <td>
+        <div *ngIf="selectedMediumSizeToppings.length > 0">
+          <div *ngIf="totalMediumSizePriceWithoutOffer > 0"><del>{{totalMediumSizePriceWithoutOffer | currency}}</del></div>
+          <div>{{ totalMediumSizePrice | currency }}</div>
+        </div>
+      </td>
+      <td>
+        <div *ngIf="selectedLargeSizeToppings.length > 0">
+          <div *ngIf="totalLargeSizePriceWithoutOffer > 0"><del>{{totalLargeSizePriceWithoutOffer | currency}}</del></div>
+          <div>{{ totalLargeSizePrice | currency }}</div>
+        </div>
+      </td>
+      <td><span *ngIf="selectedXLargeSizeToppings.length > 0">{{ totalXLargeSizePrice | currency }}</span></td>
+    </tr>
+  </tbody>
+</table>
